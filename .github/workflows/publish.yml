@@ -1,0 +1,39 @@
+name: Upload Function to Tencent Cloud
+
+on:
+    workflow_dispatch:
+    push:
+        branches: main
+        
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2.3.1
+        with: 
+          fetch-depth: 0
+
+      - name: Install Dependics 🔧
+        run: |
+          npm install
+      
+      - name: Install TCCLI
+        run: sudo pip install tccli
+          
+      - name: Configure TCCLI
+        env:
+          SECRET_ID: ${{ secrets.SecretId }}
+          SECRET_KEY: ${{ secrets.SecretKey }}
+          BUCKET: hzsb-site-1301539318
+          REGION: ap-hongkong
+        run: tccli configure set secretId $SECRET_ID secretKey $SECRET_KEY output json
+
+      - name: Zip and Upload
+        run: |
+          zip code.zip * -r
+          tccli scf UpdateFunctionCode --cli-unfold-argument --region ap-beijing --FunctionName xk-temp-su-new --InstallDependency true --Code.ZipFile `base64 code.zip`
+          tccli scf UpdateFunctionCode --cli-unfold-argument --region ap-guangzhou --FunctionName xk-temp-su-new --InstallDependency true --Code.ZipFile `base64 code.zip`
+          tccli scf UpdateFunctionCode --cli-unfold-argument --region ap-shanghai --FunctionName xk-temp-su-new --InstallDependency true --Code.ZipFile `base64 code.zip`
+          tccli scf UpdateFunctionCode --cli-unfold-argument --region ap-chengdu --FunctionName xk-temp-su-new --InstallDependency true --Code.ZipFile `base64 code.zip`
+          
