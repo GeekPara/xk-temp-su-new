@@ -8,7 +8,7 @@
 // 导入包和部分包的实例化
 const lib = require("./lib.js");
 
-function scfMain(event, context, callback) {
+async function scfMain(event, context, callback) {
   let data;
   try {
     data = JSON.parse(event.body);
