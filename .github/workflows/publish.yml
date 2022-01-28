@@ -32,8 +32,7 @@ jobs:
       - name: Zip and Upload
         run: |
           zip code.zip * -r
-          tccli scf UpdateFunctionCode --cli-unfold-argument --region ap-beijing --FunctionName xk-temp-su-new --InstallDependency true --Code.ZipFile `base64 code.zip`
-          tccli scf UpdateFunctionCode --cli-unfold-argument --region ap-guangzhou --FunctionName xk-temp-su-new --InstallDependency true --Code.ZipFile `base64 code.zip`
-          tccli scf UpdateFunctionCode --cli-unfold-argument --region ap-shanghai --FunctionName xk-temp-su-new --InstallDependency true --Code.ZipFile `base64 code.zip`
-          tccli scf UpdateFunctionCode --cli-unfold-argument --region ap-chengdu --FunctionName xk-temp-su-new --InstallDependency true --Code.ZipFile `base64 code.zip`
-          
+          tccli scf UpdateFunctionCode --cli-unfold-argument --region ap-beijing --FunctionName xk-temp-su-new --InstallDependency true --Code.ZipFile `base64 --wrap=0 code.zip`
+          tccli scf UpdateFunctionCode --cli-unfold-argument --region ap-guangzhou --FunctionName xk-temp-su-new --InstallDependency true --Code.ZipFile `base64 --wrap=0 code.zip`
+          tccli scf UpdateFunctionCode --cli-unfold-argument --region ap-shanghai --FunctionName xk-temp-su-new --InstallDependency true --Code.ZipFile `base64 --wrap=0 code.zip`
+          tccli scf UpdateFunctionCode --cli-unfold-argument --region ap-chengdu --FunctionName xk-temp-su-new --InstallDependency true --Code.ZipFile `base64 --wrap=0 code.zip`
