@@ -14,9 +14,9 @@ jobs:
         with: 
           fetch-depth: 0
 
-      - name: Install Dependics 🔧
-        run: |
-          npm install
+      # - name: Install Dependics 🔧
+      #   run: |
+      #     npm install
       
       - name: Install TCCLI
         run: sudo pip install tccli
